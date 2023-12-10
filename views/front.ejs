@@ -1,0 +1,181 @@
+<!-- public/index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="60">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <title>Node.js Express Server</title>
+    <style>
+        .table {
+            display: table;
+            width: 100%;
+            width: calc(100% - 30px);
+            border-collapse: separate;
+            border-spacing: 0 15px;
+            padding: 0 15px; /* Add padding to the left and right sides */
+
+        }
+        .row:first-child {
+    background-color: #191d28;    
+}
+.row:first-child .cell {
+    color: darkgray; 
+    
+}
+        .row {
+            display: table-row;
+            background-color: #2e3241;
+            margin-bottom: 10px;
+        }
+        .cell {
+            display: table-cell;
+            padding: 15px;
+            color: white; 
+            font-size: 24px;
+            font-weight: bold;
+            font-family: 'Oswald', sans-serif;
+            text-align: center;
+        }
+        .cell:first-child {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.cell:last-child {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+        body {
+            background-color: #191d28;
+            margin: 0;
+        }
+/*secondphase*/
+.header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background-color: #191d28;
+            color: white;
+        }
+
+        h1#title {
+            color: #3dc6c1;
+            font-size: 2em; /* Adjust the size as needed */
+            margin: 0; /* Remove default margin */
+        }
+
+        .buttons-group {
+            display: flex;
+            align-items: center;
+            margin-right: 80vh;
+        }
+
+        .rounded-dropdown-btn, .rounded-dropdown-btn2, .standalone-btn {
+            background-color: #2e3241;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 10px; /* Adjust the radius for rounded corners */
+            cursor: pointer;
+            margin-left: 10px; /* Reduce space between buttons */
+        }
+
+        .rounded-dropdown-btn:hover, .rounded-dropdown-btn2:hover, .standalone-btn:hover {
+            background-color: #3dc6c1; /* Change color on hover */
+        }
+
+        .dropdown-content, .dropdown-content2 {
+            display: none;
+            position: absolute;
+            background-color: #2e3241;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            color: white;
+            border-radius: 5px;
+        }
+
+        .dropdown:hover .dropdown-content, .dropdown2:hover .dropdown-content2 {
+            display: block;
+        }
+
+        .dropdown-content a, .dropdown-content2 a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: white;
+            border-radius: 5px;
+        }
+
+        .dropdown-content a:hover, .dropdown-content2 a:hover {
+            background-color: #3dc6c1; /* Change color on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="header-container">
+        <h1 id="title">HODLINFO</h1>
+
+        <!-- Group of buttons -->
+        <div class="buttons-group">
+            <!-- First dropdown -->
+            <div class="dropdown">
+                <button class="rounded-dropdown-btn">INR</button>
+                <div class="dropdown-content">
+                    <a href="#">INR</a>
+                    <!-- Add more options if needed -->
+                </div>
+            </div>
+
+            <!-- Second dropdown -->
+            <div class="dropdown2">
+                <button class="rounded-dropdown-btn2">BTC</button>
+                <div class="dropdown-content2">
+                    <a href="#">BTC</a>
+                    <a href="#">ETH</a>
+                    <a href="#">USDT</a>
+                    <a href="#">XRP</a>
+                    <a href="#">TRX</a>
+                    <a href="#">DASH</a>
+                    <a href="#">ZEC</a>
+                    <a href="#">XEM</a>
+                    <a href="#">IOST</a>
+                    <a href="#">WIN</a>
+                    <a href="#">BTT</a>
+                    <a href="#">WRX</a>
+                    <!-- Add more options if needed -->
+                </div>
+            </div>
+
+            <!-- Standalone button -->
+            <button class="standalone-btn" onclick="window.location.href='your-link-here'">Buy BTC</button>
+        </div>
+    </div>
+    <div class="table">
+        <div class="row">
+            <div class="cell">#</div>
+            <div class="cell">Name</div>
+            <div class="cell">Last</div>
+            <div class="cell">Buy</div>
+            <div class="cell">Sell</div>
+            <div class="cell">Volume</div>
+            <div class="cell">Base Unit</div>
+        </div>
+        <%for(let i = 0; i < ticker.length; i++) {%>
+            <div class="row">
+                <div class="cell"><%= (i+1) %></div>
+                <div class="cell"><%= ticker[i].name %></div>
+                <div class="cell">₹ <%= parseFloat(ticker[i].last).toLocaleString('en-IN') %></div>
+                <div class="cell">₹ <%= parseFloat(ticker[i].buy).toLocaleString('en-IN') %></div>
+                <div class="cell">₹ <%= parseFloat(ticker[i].sell).toLocaleString('en-IN') %></div>
+                <div class="cell"><%= parseFloat(ticker[i].volume).toLocaleString('en-IN') %></div>
+                <div class="cell"><%= ticker[i].base_unit %></div>
+            </div>
+        <% } %>
+    </div>    
+</body>
+</html>
